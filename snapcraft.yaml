@@ -25,7 +25,7 @@ apps:
       - optical-drive
       - removable-media
     common-id: org.gnome.Loupe
-    #desktop: usr/share/applications/io.github.nate_xyz.Conjure.desktop
+    #desktop: usr/share/applications/
     
     
 parts:
