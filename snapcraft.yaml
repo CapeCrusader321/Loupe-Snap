@@ -38,6 +38,8 @@ parts:
       - --prefix=/snap/loupe/current/usr
     build-packages:
       - build-essential
+      - cargo
+      - rust-1.62-all
     override-pull: |
       craftctl default
       craftctl set version=$(git describe --tags --abbrev=0)
