@@ -1,0 +1,46 @@
+name: loupe
+base: core22
+adopt-info: loupe
+grade: stable
+confinement: strict
+compression: lzo
+architectures:
+  - build-on: amd64
+  - build-on: armhf
+  - build-on: arm64
+  
+slots:
+  loupe:
+    interface: dbus
+    bus: session
+    name: org.gnome.Loupe
+
+apps:
+  loupe:
+    command: usr/bin/loupe
+    extensions: [gnome]
+    plugs:
+      - home
+      - network
+      - optical-drive
+      - removable-media
+    common-id: org.gnome.Loupe
+    #desktop: usr/share/applications/io.github.nate_xyz.Conjure.desktop
+    
+    
+parts:
+  loupe:
+    source: https://gitlab.gnome.org/GNOME/Incubator/loupe.git
+    source-tag: 44.3
+    plugin: meson
+    parse-info: [usr/share/metainfo/org.gnome.Loupe.metainfo.xml.in.in]
+    meson-parameters:
+      - --prefix=/snap/loupe/current/usr
+    build-packages:
+      - build-essential
+    override-pull: |
+      craftctl default
+      craftctl set version=$(git describe --tags --abbrev=0)
+    organize:
+      snap/loupe/current/usr: usr
+ 
